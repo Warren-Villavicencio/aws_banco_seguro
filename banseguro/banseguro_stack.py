@@ -42,7 +42,7 @@ class BanseguroStack(Stack):
         )
 
 
-   # Define the API Gateway
+   # Define the gAPI Gateway
         api = apigw.RestApi(self, "banco_seguro_api")
 
         # Define the API Gateway resources and methods
