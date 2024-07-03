@@ -58,3 +58,18 @@ class BanseguroStack(Stack):
         )
 
         topic.add_subscription(subs.SqsSubscription(queue))
+class BancoSeguroStack(core.Stack):
+    def __init__(self, scope: core.Construct, construct_id: str, **kwargs) -> None:
+        super().__init__(scope, construct_id, **kwargs)
+
+        # Crea la tabla DynamoDB (opcional)
+        banco_seguro_table = BancoSeguroTable(self, "banco-seguro-table")
+
+        # Crea la función Lambda para cambio de clave
+        cambio_clave_lambda = BancoSeguroLambda(self, "cambio-clave-lambda", table=banco_seguro_table)
+
+        # Crea la función Lambda para retiro de dinero
+        retiro_dinero_lambda = BancoSeguroRetiroLambda(self, "retiro-dinero-lambda", table=banco_seguro_table)
+
+        # Crea la API Gateway
+        banco_seguro_api = BancoSeguroApi(self, "banco-seguro-api", cambio_clave_lambda, banco_seguro_table)
