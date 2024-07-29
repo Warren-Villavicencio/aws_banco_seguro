@@ -25,23 +25,23 @@ class BancoSeguroRetiroLambda(lambda_.Function):
                 "body": json.dumps({"mensaje": "Retiro realizado exitosamente", "saldo_actual": cuenta["saldo"]})
             }
 
-        # Configuración de la función Lambda
+        
         self.handler = handler
         self.runtime = lambda_.Runtime.PYTHON_3_8
 
 class BancoSeguroApi(apigw.RestApi):
-    # ... (código anterior)
+   
 
     def __init__(self, scope: core.Construct, id: str, lambda_function: lambda_.Function, table: dynamodb.Table, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        # Crea un recurso para la API
+     
         resource = self.root.add_resource("banco-seguro")
 
-        # Crea un método POST para el endpoint de cambio de clave
+     
         change_password_integration = apigw.LambdaIntegration(lambda_function)
         resource.add_method("POST", change_password_integration, operation_name="cambiarClave")
 
-        # Crea un método POST para el endpoint de retiro de dinero
+       
         withdraw_money_integration = apigw.LambdaIntegration(lambda_function)
         resource.add_method("POST", withdraw_money_integration, operation_name="retirarDinero")
