@@ -34,7 +34,7 @@ class BancoSeguroLambda(lambda_.Function):
                 "body": json.dumps({"mensaje": "Clave de la tarjeta de débito cambiada exitosamente"})
             }
 
-        # Configuración de la función Lambda
+        
         self.handler = handler
         self.runtime = lambda_.Runtime.PYTHON_3_8
 class BancoSeguroTable(dynamodb.Table):
