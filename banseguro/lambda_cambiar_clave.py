@@ -10,9 +10,9 @@ class BancoSeguroLambda(lambda_.Function):
     def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-     
+        # Código fuente de la función Lambda (adaptado de tu API Flask)
         def handler(event, context):
-          
+            # Simulando la consulta a la base de datos (reemplazar con DynamoDB)
             cuenta = {
                 "numerodecuenta": "1234567890",
                 "titular": "Juan Perez",

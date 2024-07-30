@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
+
 import aws_cdk as cdk
-from bank_account.bank_account_stack import BankAccountStack
+
+from banseguro.banseguro_stack import BanseguroStack
+
 
 app = cdk.App()
-BankAccountStack(app, "BankAccountStack")
+BanseguroStack(app, "BanseguroStack")
+
 app.synth()

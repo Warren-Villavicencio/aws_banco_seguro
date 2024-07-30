@@ -48,14 +48,15 @@ def send_email(cuenta, deposito):
     
     pass
 
-
+# Empaquetar la aplicación FastAPI en un handler de Lambda
 def lambda_handler(event, context):
-   
+    # Cargar el cuerpo de la solicitud JSON
     body = json.loads(event["body"])
 
-    
+    # Convertir el cuerpo en un objeto DepositoBase
     deposito = DepositoBase(**body)
 
+    # Invocar la función `depositar_dinero`
     try:
         response = depositar_dinero(deposito)
         return {
@@ -68,7 +69,7 @@ def lambda_handler(event, context):
             "body": json.dumps({"error": str(e)}),
         }
 
-
+# Definir la variable de entorno para la URL de la base de datos
 lambda_client = boto3.client("lambda")
 lambda_client.update_function_configuration(
     FunctionName="banseguro-depositar",
